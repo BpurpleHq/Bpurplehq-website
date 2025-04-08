@@ -4,7 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { Card, Button } from "@/components/ui/index"
 import { Download, ExternalLink, Mail, Phone, Moon, Sun } from "lucide-react"
-import { Linkedin, Twitter, Facebook, Music } from "lucide-react"
+import { Linkedin, Twitter, Instagram, Facebook, Music, MessageCircle, Send } from "lucide-react"
 import { useTheme } from "next-themes"
 
 export default function ProfilePage() {
@@ -12,17 +12,24 @@ export default function ProfilePage() {
   const { theme, setTheme } = useTheme()
 
   const profile = {
-    name: "Ayotomiwa Ebubechukwu",
-    title: "Product Designer",
+    name: "Joachim Mbidom",
+    title: "Growth and Sales Lead @ Bpurple Technology.",
     photo: "/1743280225596.jpeg?height=500&width=500",
-    phone: "+234 (813) 74 742-4023",
-    email: "ebubechukwu.a@bpurplehq.org",
-    socials: [
-      { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/joachim-uche", color: "#0077B5" },
-      { name: "Twitter", icon: Twitter, url: "https://twitter.com/joachimuche", color: "#1DA1F2" },
-      { name: "Facebook", icon: Facebook, url: "https://facebook.com/alexjohnson", color: "#4267B2" },
-      { name: "TikTok", icon: Music, url: "https://tiktok.com/@alexjohnson", color: "#000000" },
-    ],
+    bg: "/100.jpg?height=500&width=500",
+    phone: "+234 (813) 747 4240",
+    email: "joachim.a@bpurplehq.org",
+    about:
+    "Joachim is an assertive and solution driven Data expert, deploying cutting edge technology solutions. Over the years of working, I have built my capacity working and leading functional teams cutting across agile+scrum methodology driven workspace, software development and testing, product management.",
+  socials: [
+    { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/alexjohnson", color: "#0077B5" },
+    { name: "WhatsApp", icon: MessageCircle, url: "https://wa.me/2348137474240", color: "#25D366" },
+    { name: "Instagram", icon: Instagram, url: "#", color: "#0088cc" },
+    { name: "X", icon: Twitter, url: "https://x.com/alexjohnson", color: "#1DA1F2" },
+    { name: "Facebook", icon: Facebook, url: "#", color: "#4267B2" },
+    { name: "TikTok", icon: Music, url: "#", color: "#0088cc" },
+    { name: "Telegram", icon: Send, url: "#", color: "#0088cc" },
+    
+  ],
   }
 
   const saveContact = () => {
@@ -67,9 +74,9 @@ END:VCARD`
 
       <Card className="w-full max-w-md overflow-hidden shadow-lg rounded-xl dark:bg-gray-800 dark:border-gray-700">
         {/* Image occupying the entire gradient section */}
-        <div className="relative w-full h-64 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-black-100 to-white opacity-90 z-10"></div>
-          <Image src={profile.photo || "/placeholder.svg"} alt={profile.name} fill className="object-cover z-0" />
+        <div className="relative w-full h-48 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-black-100 to-white opacity-30 z-10"></div>
+          <Image src={profile.bg || "/placeholder.svg"} alt={profile.name} fill className="object-cover z-0" />
         </div>
 
         {/* Circular profile image - made more prominent */}
@@ -89,8 +96,8 @@ END:VCARD`
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white">{profile.name}</h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1">{profile.title}</p>
 
-          <div className="mt-6 space-y-3">
-            <div className="flex items-center justify-center space-x-2">
+          <div className="flex gap-2 mt-4 justify-center">
+            {/* <div className="flex items-center justify-center space-x-2">
               <Phone className="w-5 h-5 text-gray-500 dark:text-gray-400" />
               <span className="text-gray-700 dark:text-gray-300">{profile.phone}</span>
             </div>
@@ -98,27 +105,42 @@ END:VCARD`
             <div className="flex items-center justify-center space-x-2">
               <Mail className="w-5 h-5 text-gray-500 dark:text-gray-400" />
               <span className="text-gray-700 dark:text-gray-300">{profile.email}</span>
-            </div>
+            </div> */}
 
-            <Button
-              onClick={saveContact}
-              className="mt-3 px-4 py-1 h-9 text-sm flex items-center justify-center gap-2 mx-auto"
-              variant={contactSaved ? "outline" : "default"}
-              size="sm"
-            >
-              {contactSaved ? (
-                "Contact Saved!"
-              ) : (
-                <>
-                  <Download className="w-3 h-3" />
-                  Save Contact
-                </>
-              )}
-            </Button>
+                  <Button
+                    onClick={saveContact}
+                    className="px-3 py-1 h-9 text-sm flex items-center justify-center gap-1"
+                    variant={contactSaved ? "outline" : "default"}
+                    size="sm"
+                  >
+                    {contactSaved ? (
+                      "Saved!"
+                    ) : (
+                      <>
+                        <Download className="w-3 h-3" />
+                        Save Contact
+                      </>
+                    )}
+                  </Button>
+
+                  <Button
+                    
+                    className="px-3 py-1 h-9 text-sm flex items-center justify-center gap-1"
+                    
+                    size="sm"
+                  >
+          
+                  </Button>
+            
+          </div>
+          <div className="mt-8">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2 text-left">About</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed text-justify">{profile.about}</p>
           </div>
 
           {/* Social icons in a 2x2 grid with colors */}
           <div className="mt-6">
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 text-left">Connect on socials</h2>
             <div className="grid grid-cols-3 gap-4 max-w-[300px] mx-auto">
               {profile.socials.map((social) => (
                 <a
@@ -126,10 +148,10 @@ END:VCARD`
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
+                  className="p-3 rounded-lg bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
                   aria-label={social.name}
                 >
-                  <social.icon className="w-7 h-7" style={{ color: social.color }} />
+                  <social.icon className="w-6 h-6" style={{ color: social.color }} />
                 </a>
               ))}
             </div>
