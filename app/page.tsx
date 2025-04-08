@@ -75,7 +75,7 @@ END:VCARD`
       <Card className="w-full max-w-md overflow-hidden shadow-lg rounded-xl dark:bg-gray-800 dark:border-gray-700">
         {/* Image occupying the entire gradient section */}
         <div className="relative w-full h-48 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-black-100 to-white opacity-30 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black-100 to-white opacity-5 z-10"></div>
           <Image src={profile.bg || "/placeholder.svg"} alt={profile.name} fill className="object-cover z-0" />
         </div>
 
