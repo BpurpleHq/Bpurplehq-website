@@ -1,11 +1,17 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Card, Button } from "@/components/ui/index"
 import { Download, ExternalLink, Mail, Phone, Moon, Sun } from "lucide-react"
 import { Linkedin, Twitter, Instagram, Facebook, Music, MessageCircle, Send } from "lucide-react"
 import { useTheme } from "next-themes"
+import { CardContent } from "@/components/ui/card"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { Play } from "lucide-react"
+import Link from "next/link"
+
+
 
 export default function ProfilePage() {
   const [contactSaved, setContactSaved] = useState(false)
@@ -15,13 +21,13 @@ export default function ProfilePage() {
     name: "Joachim Mbidom",
     title: "Growth and Sales Lead @ Bpurple Technology.",
     photo: "/1743280225596.jpeg?height=500&width=500",
-    bg: "/100.jpg?height=500&width=500",
+    bg: "/101.png?height=500&width=500",
     phone: "+234 (813) 747 4240",
     email: "joachim.a@bpurplehq.org",
     about:
-    "Joachim is an assertive and solution driven Data expert, deploying cutting edge technology solutions. Over the years of working, I have built my capacity working and leading functional teams cutting across agile+scrum methodology driven workspace, software development and testing, product management.",
+    "An assertive and solution driven Data expert, deploying cutting edge technology solutions. Over the years of working, I have built my capacity working and leading functional teams cutting across agile+scrum methodology driven workspace, software development and testing, product management.",
   socials: [
-    { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/alexjohnson", color: "#0077B5" },
+    { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/joachim-uche", color: "#0077B5" },
     { name: "WhatsApp", icon: MessageCircle, url: "https://wa.me/2348137474240", color: "#25D366" },
     { name: "Instagram", icon: Instagram, url: "#", color: "#0088cc" },
     { name: "X", icon: Twitter, url: "https://x.com/alexjohnson", color: "#1DA1F2" },
@@ -31,7 +37,7 @@ export default function ProfilePage() {
     
   ],
   }
-
+    
   const saveContact = () => {
     // Create a vCard format
     const vCard = `BEGIN:VCARD
@@ -66,7 +72,7 @@ END:VCARD`
         onClick={toggleTheme}
         variant="outline"
         size="icon"
-        className="absolute top-4 right-4 rounded-full bg-white/10 backdrop-blur-sm dark:bg-black/20"
+        className="absolute top-4 right-4 rounded-full bg-white/10 backdrop-blur-sm dark:bg-black/0"
       >
         {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         <span className="sr-only">Toggle theme</span>
@@ -110,7 +116,7 @@ END:VCARD`
                   <Button
                     onClick={saveContact}
                     className="px-3 py-1 h-9 text-sm flex items-center justify-center gap-1"
-                    variant={contactSaved ? "outline" : "default"}
+                    variant={contactSaved ? "outline" : "secondary"}
                     size="sm"
                   >
                     {contactSaved ? (
@@ -157,8 +163,39 @@ END:VCARD`
             </div>
           </div>
 
+               {/* Social icons in a 2x2 grid with colors */}
+      <div className="mt-6">   
+      <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 text-left">My Youtube Video</h2>
+      <div className="w-full rounded-lg overflow-hidden aspect-video">
+        { (
+          <div className="relative w-full h-full cursor-pointer">
+            <Image src={"/placeholder.svg"} fill className="object-cover" />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+              <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                <Play className="w-8 h-8 text-white fill-white" />
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+              <h3 className="text-white font-medium line-clamp-2">{}</h3>
+            </div>
+          </div>
+        ) }
+      </div>
+      </div>
+      <div className="mt-6">   
+      <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 text-left"> Product Listings</h2>
+      <div className="w-full rounded-lg overflow-hidden aspect-video">
+        { (
+          <div className="relative w-full h-full">
+            <Image src={"/placeholder.svg"} fill className="object-cover" />  
+          </div>
+        ) }
+      </div>
+      </div>
+          
+
           <div className="mt-8 pt-6 border-t border-gray-200">
-            <p className="text-xs text-gray-500">Made with 💜 from bpurpleHQ</p>
+            <p className="text-xs text-gray-500">Made with 💜 from bpurple Technology</p>
           </div>
         </div>
       </Card>
