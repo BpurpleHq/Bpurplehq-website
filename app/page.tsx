@@ -1,6 +1,4 @@
 "use client"
-
-import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Card, Button } from "@/components/ui/index"
 import { Download, ExternalLink, Mail, Phone, Moon, Sun } from "lucide-react"
@@ -9,14 +7,36 @@ import { useTheme } from "next-themes"
 import { CardContent } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { Play } from "lucide-react"
-import Link from "next/link"
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
+const UserList = () => {
+    const [users, setUsers] = useState([]);
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+              const userId = '5746dd9f-6310-4613-94cd-8680874b2678'
+                const response = await axios.get(`http://localhost:3003/api/users/${userId}`); // adjust port if needed
+                setUsers(response.data.data);
+                
+            } catch (err) {
+                console.error('Error fetching users:', err);
+
+            }
+        };
+
+        fetchUsers();
+    }, []);
+
+  }
 
 export default function ProfilePage() {
   const [contactSaved, setContactSaved] = useState(false)
   const { theme, setTheme } = useTheme()
 
+
+  
   const profile = {
     name: "Joachim Mbidom",
     title: "Growth and Sales Lead @ Bpurple Technology.",
@@ -30,7 +50,7 @@ export default function ProfilePage() {
     { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/joachim-uche", color: "#0077B5" },
     { name: "WhatsApp", icon: MessageCircle, url: "https://wa.me/2348137474240", color: "#25D366" },
     { name: "Instagram", icon: Instagram, url: "#", color: "#0088cc" },
-    { name: "X", icon: Twitter, url: "https://x.com/alexjohnson", color: "#1DA1F2" },
+    { name: "X", icon: Twitter, url: "https://x.com/joachimuche", color: "#1DA1F2" },
     { name: "Facebook", icon: Facebook, url: "#", color: "#4267B2" },
     { name: "TikTok", icon: Music, url: "#", color: "#0088cc" },
     { name: "Telegram", icon: Send, url: "#", color: "#0088cc" },
@@ -66,19 +86,19 @@ END:VCARD`
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex flex-col items-center p-4">
+    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex flex-col items-center">
       {/* Theme toggle button */}
       <Button
         onClick={toggleTheme}
         variant="outline"
         size="icon"
-        className="absolute top-4 right-4 rounded-full bg-white/10 backdrop-blur-sm dark:bg-black/0"
+        className="absolute top-4 right-4 rounded-full bg-white/10 backdrop-blur-sm dark:bg-black/70"
       >
         {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         <span className="sr-only">Toggle theme</span>
       </Button>
 
-      <Card className="w-full max-w-md overflow-hidden shadow-lg rounded-xl dark:bg-gray-800 dark:border-gray-700">
+      <Card className="w-full max-w-md overflow-hidden shadow-lg rounded-none dark:bg-gray-800 dark:border-gray-700">
         {/* Image occupying the entire gradient section */}
         <div className="relative w-full h-48 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-black-100 to-white opacity-5 z-10"></div>
@@ -134,7 +154,7 @@ END:VCARD`
                     className="px-3 py-1 h-9 text-sm flex items-center justify-center gap-1"
                     
                     size="sm"
-                  >
+                  > Exchange Contact
           
                   </Button>
             
@@ -157,7 +177,7 @@ END:VCARD`
                   className="p-3 rounded-lg bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
                   aria-label={social.name}
                 >
-                  <social.icon className="w-6 h-6" style={{ color: social.color }} />
+                  <social.icon className="w-10 h-10" style={{ color: social.color }} />
                 </a>
               ))}
             </div>
